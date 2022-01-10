@@ -31,6 +31,7 @@
     </mat-card-actions>
   </mat-card>
    <div>
+   
   <mat-list *ngIf="dish">
     <h3>Comments</h3>
     <mat-list-item class="comment" *ngFor="let comment of dish.comments">
@@ -39,7 +40,12 @@
       <p matLine>-- {{ comment.author }} {{ comment.date | date }}</p>
     </mat-list-item>
   </mat-list>
+  <div [hidden]="dish">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  
 </div>
+
 </div>
 
  
