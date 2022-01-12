@@ -57,7 +57,8 @@ constructor( private dishService: DishService,
                }
 
 ngOnInit() {
-                this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+                this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
+                        errmess => this.errMess = <any>errmess);
                 this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
                 .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id);});
               
