@@ -20,7 +20,7 @@
         <h3>{{ dish.name | uppercase }}</h3>
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="{{ dish.image }}" alt="{{ dish.name }}" />
+    <img mat-card-image src="{{ BaseURL + dish.image }}" alt="{{ dish.name }}" />
     <mat-card-content>
       <p>{{ dish.description }}</p>
     </mat-card-content>
@@ -49,8 +49,8 @@
           </p>
         </mat-list-item>
       </mat-list>
-      <div *ngIf="dishcopy?.comment">
-        <mat-list-item *ngFor="let val of dishcopy?.comment">
+      <div *ngIf="dishcopy?.comments">
+        <mat-list-item *ngFor="let val of dishcopy?.comments">
           <p matLine>{{ val.comment }}</p>
           <p matLine>{{ val.rating }} Stars</p>
           <p matLine>-- {{ val.author }} {{ val.date | date }}</p>

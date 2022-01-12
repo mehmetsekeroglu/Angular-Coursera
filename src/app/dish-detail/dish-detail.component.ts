@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -51,6 +51,7 @@ constructor( private dishService: DishService,
                private route: ActivatedRoute,
                private location: Location,
                private fb: FormBuilder,
+               @Inject('BaseURL') public BaseURL:any
                ) { 
                 this.createForm();
                }
@@ -115,8 +116,8 @@ setPrevNext(dishId: number | any) {
   onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString()
-    this.dishcopy?.comments.push(this.comment);
-    (    errmess: any) => {this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; };
+    this.dish?.comments.push(this.comment);
+  //  (    errmess: any) => {this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; };
     console.log(this.comment);
     this.comment = null;
     this.commentForm.reset({
