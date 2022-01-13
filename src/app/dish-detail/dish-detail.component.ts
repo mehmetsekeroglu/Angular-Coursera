@@ -8,6 +8,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+
 //import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 
@@ -59,8 +60,10 @@ constructor( private dishService: DishService,
 ngOnInit() {
                 this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
                         errmess => this.errMess = <any>errmess);
-                this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-                .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id);});
+                        this.route.params
+                        .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
+                        .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+                          errmess => this.errMess = <any>errmess );
               
               }
 setPrevNext(dishId: number | any) {
@@ -116,10 +119,14 @@ setPrevNext(dishId: number | any) {
 
   onSubmit() {
     this.comment = this.commentForm.value;
-    this.comment.date = new Date().toISOString()
-    this.dish?.comments.push(this.comment);
-  //  (    errmess: any) => {this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; };
+    this.comment.date = new Date().toISOString();
     console.log(this.comment);
+    this.dishcopy?.comments.push(this.comment);
+    this.dishService.putDish(this.dishcopy).subscribe(dish => {
+        this.dish = dish; this.dishcopy = dish;
+      },
+      errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
+   
     this.comment = null;
     this.commentForm.reset({
       author: '',

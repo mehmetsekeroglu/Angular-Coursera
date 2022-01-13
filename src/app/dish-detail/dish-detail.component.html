@@ -49,13 +49,13 @@
           </p>
         </mat-list-item>
       </mat-list>
-      <div *ngIf="dishcopy?.comments">
+      <!-- <div *ngIf="dishcopy?.comments">
         <mat-list-item *ngFor="let val of dishcopy?.comments">
           <p matLine>{{ val.comment }}</p>
           <p matLine>{{ val.rating }} Stars</p>
           <p matLine>-- {{ val.author }} {{ val.date | date }}</p>
         </mat-list-item>
-      </div>
+      </div> -->
 
       <mat-list-item *ngIf="commentForm.valid">
         <p matLine>{{ commentForm.value.comment }}</p>
