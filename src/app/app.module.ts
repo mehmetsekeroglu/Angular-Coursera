@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 
@@ -55,7 +56,8 @@ import { LeaderService } from './services/leader.service';
     AboutComponent,
     ContactComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
